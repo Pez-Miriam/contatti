@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dott.ssa [Nome Cognome] — Psicoterapeuta</title>
+<style>
+  :root {
+    --bg: #faf6f1;
+    --card: #ffffff;
+    --ink: #2b2620;
+    --ink-soft: #6b6258;
+    --ink-faded: #9a9085;
+    --accent: #b08762;       /* terracotta morbida */
+    --accent-deep: #8a6747;
+    --sage: #8a9a7b;         /* salvia per accent secondario */
+    --line: #ece5db;
+    --shadow: 0 1px 2px rgba(43,38,32,0.04), 0 8px 24px rgba(43,38,32,0.06);
+    --radius: 14px;
+    --max: 480px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    display: flex;
+    justify-content: center;
+    padding: 0 0 32px;
+  }
+
+  .page {
+    width: 100%;
+    max-width: var(--max);
+    background: var(--bg);
+    position: relative;
+    min-height: 100vh;
+  }
+
+  /* sans-serif per ui labels e numeri */
+  .ui {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+
+  /* ---------------- HERO ---------------- */
+  .hero {
+    padding: 56px 28px 24px;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 200px;
+    background: linear-gradient(180deg, #efe4d4 0%, transparent 100%);
+    z-index: 0;
+  }
+
+  .hero > * { position: relative; z-index: 1; }
+
+  .avatar {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    color: var(--accent);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 38px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .avatar img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+
+  .role-tag {
+    display: inline-block;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    margin-bottom: 12px;
+  }
+
+  .name {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+  }
+
+  .name .salutation {
+    display: block;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+    letter-spacing: 0;
+  }
+
+  .subtitle {
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  .albo {
+    margin-top: 14px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+    font-weight: 500;
+  }
+
+  /* ---------------- CTA primaria ---------------- */
+  .save-cta {
+    margin: 28px 24px 0;
+  }
+
+  .btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px 20px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(176,135,98,0.25);
+    text-decoration: none;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+  .btn-primary:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 10px rgba(176,135,98,0.2);
+  }
+
+  /* ---------------- SECTIONS ---------------- */
+  .section {
+    padding: 32px 24px 8px;
+  }
+
+  .section-title {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    margin-bottom: 14px;
+    padding-left: 4px;
+  }
+
+  /* ---------------- CONTACT ROWS ---------------- */
+  .rows {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    color: var(--ink);
+    text-decoration: none;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+  .row:active {
+    background: #f5efe5;
+    transform: translateY(1px);
+  }
+
+  .row .ico {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #f5efe5;
+    color: var(--accent-deep);
+    display: grid;
+    place-items: center;
+    flex: 0 0 38px;
+  }
+
+  .row .body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+  }
+
+  .row .body .lbl {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    font-weight: 500;
+  }
+
+  .row .body .val {
+    font-size: 15px;
+    color: var(--ink);
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .row .body .val.multiline { white-space: normal; }
+
+  .row .chev {
+    color: var(--ink-faded);
+    flex: 0 0 auto;
+  }
+
+  /* ---------------- SERVICES ---------------- */
+  .services {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .service {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+    border-bottom: 1px solid var(--line);
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+  }
+  .service:last-child { border-bottom: none; }
+
+  .service .dot {
+    flex: 0 0 6px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--sage);
+    margin-top: 8px;
+  }
+
+  .service .txt {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .service .txt .name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0;
+  }
+
+  .service .txt .desc {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+
+  /* ---------------- QUOTE / About ---------------- */
+  .about {
+    margin: 28px 24px 0;
+    padding: 24px 22px;
+    background: #f5efe5;
+    border-radius: var(--radius);
+    text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink);
+    position: relative;
+  }
+  .about::before {
+    content: "“";
+    display: block;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 56px;
+    line-height: 0.5;
+    color: var(--accent);
+    margin-bottom: 12px;
+    margin-top: 8px;
+  }
+
+  /* ---------------- SOCIAL ROW ---------------- */
+  .socials {
+    display: flex;
+    gap: 12px;
+    padding: 28px 24px 0;
+  }
+  .social-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 12px;
+    border-radius: var(--radius);
+    background: var(--card);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+  .social-btn:active { transform: translateY(1px); background: #f5efe5; }
+  .social-btn .ico {
+    width: 22px; height: 22px;
+    display: grid; place-items: center;
+    color: var(--accent-deep);
+  }
+
+  /* ---------------- FOOTER ---------------- */
+  .footer {
+    text-align: center;
+    margin-top: 36px;
+    padding: 0 24px;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ink-faded);
+    line-height: 1.6;
+  }
+
+  .footer .divider {
+    width: 32px;
+    height: 1px;
+    background: var(--line);
+    margin: 0 auto 14px;
+  }
+</style>
+</head>
+<body>
+  <main class="page" data-screen-label="01 Miriam">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="avatar" id="avatar">
+        <img src="miriam.jpg" alt="Foto di Miriam">
+      </div>
+      <div class="role-tag">Psicoterapeuta</div>
+      <h1 class="name">
+        <span class="salutation">Dott.ssa</span>
+        Nome Cognome
+      </h1>
+      <p class="subtitle">Specialista in psicoterapia<br>cognitivo-comportamentale</p>
+      <p class="albo">Albo Psicologi · n° 00000 · Lazio</p>
+    </header>
+
+    <!-- CTA: salva contatto -->
+    <div class="save-cta">
+      <a class="btn-primary" id="btn-vcf" href="#" download="miriam-cognome.vcf">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+          <polyline points="17 21 17 13 7 13 7 21"/>
+          <polyline points="7 3 7 8 15 8"/>
+        </svg>
+        Salva contatto
+      </a>
+    </div>
+
+    <!-- CONTATTI -->
+    <section class="section">
+      <h2 class="section-title">Contatti</h2>
+      <div class="rows">
+        <a class="row" href="tel:+393331234567">
+          <span class="ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
+          <span class="body">
+            <span class="lbl">Telefono</span>
+            <span class="val">+39 333 123 4567</span>
+          </span>
+          <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+
+        <a class="row" href="mailto:nome.cognome@email.it">
+          <span class="ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </span>
+          <span class="body">
+            <span class="lbl">Email</span>
+            <span class="val">nome.cognome@email.it</span>
+          </span>
+          <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+
+        <a class="row" href="https://wa.me/393331234567" target="_blank" rel="noopener">
+          <span class="ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.8-2c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2 0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.7 4.3 3.8.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12c0 1.7.5 3.4 1.3 4.8L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+          </span>
+          <span class="body">
+            <span class="lbl">WhatsApp</span>
+            <span class="val">Scrivi un messaggio</span>
+          </span>
+          <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+
+        <a class="row" id="row-address" href="https://maps.apple.com/?q=Via+Esempio+1,+Roma" target="_blank" rel="noopener">
+          <span class="ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </span>
+          <span class="body">
+            <span class="lbl">Studio</span>
+            <span class="val multiline">Via Esempio 1<br>00100 Roma (RM)</span>
+          </span>
+          <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ABOUT / quote -->
+    <div class="about">
+      Uno spazio di ascolto, accoglienza e cura per ritrovare equilibrio e benessere.
+    </div>
+
+    <!-- SERVIZI -->
+    <section class="section">
+      <h2 class="section-title">Servizi offerti</h2>
+      <div class="services">
+        <div class="service">
+          <span class="dot"></span>
+          <span class="txt">
+            <span class="name">Psicoterapia individuale</span>
+            <span class="desc">Percorsi personalizzati per adulti e giovani adulti</span>
+          </span>
+        </div>
+        <div class="service">
+          <span class="dot"></span>
+          <span class="txt">
+            <span class="name">Terapia di coppia</span>
+            <span class="desc">Sostegno alla comunicazione e alla relazione</span>
+          </span>
+        </div>
+        <div class="service">
+          <span class="dot"></span>
+          <span class="txt">
+            <span class="name">Disturbi d'ansia e dell'umore</span>
+            <span class="desc">Approccio cognitivo-comportamentale</span>
+          </span>
+        </div>
+        <div class="service">
+          <span class="dot"></span>
+          <span class="txt">
+            <span class="name">Consulenza online</span>
+            <span class="desc">Sessioni in videochiamata su appuntamento</span>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOCIAL -->
+    <div class="socials">
+      <a class="social-btn" href="https://www.linkedin.com/in/username" target="_blank" rel="noopener">
+        <span class="ico">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </span>
+        LinkedIn
+      </a>
+      <a class="social-btn" href="https://instagram.com/username" target="_blank" rel="noopener">
+        <span class="ico">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg>
+        </span>
+        Instagram
+      </a>
+    </div>
+
+    <footer class="footer">
+      <div class="divider"></div>
+      Dott.ssa Nome Cognome · P.IVA 00000000000
+    </footer>
+
+  </main>
+
+<script>
+/* ===========================================================
+   Genera dinamicamente la vCard al click "Salva contatto"
+   Tutti i campi sono placeholder — modifica i valori qui sotto
+   =========================================================== */
+(function () {
+  const vcfData = {
+    firstName: 'Nome',
+    lastName: 'Cognome',
+    title: 'Psicoterapeuta',
+    org: 'Studio di Psicoterapia',
+    phone: '+393331234567',
+    email: 'nome.cognome@email.it',
+    website: 'https://example.com',
+    street: 'Via Esempio 1',
+    city: 'Roma',
+    zip: '00100',
+    region: 'RM',
+    country: 'Italia',
+    note: 'Albo Psicologi Lazio n° 00000 · P.IVA 00000000000'
+  };
+
+  function buildVCard(d) {
+    return [
+      'BEGIN:VCARD',
+      'VERSION:3.0',
+      `N:${d.lastName};${d.firstName};;;`,
+      `FN:Dott.ssa ${d.firstName} ${d.lastName}`,
+      `ORG:${d.org}`,
+      `TITLE:${d.title}`,
+      `TEL;TYPE=CELL,VOICE:${d.phone}`,
+      `EMAIL;TYPE=INTERNET:${d.email}`,
+      `URL:${d.website}`,
+      `ADR;TYPE=WORK:;;${d.street};${d.city};${d.region};${d.zip};${d.country}`,
+      `NOTE:${d.note}`,
+      'END:VCARD'
+    ].join('\r\n');
+  }
+
+  const btn = document.getElementById('btn-vcf');
+  if (btn) {
+    const blob = new Blob([buildVCard(vcfData)], { type: 'text/vcard;charset=utf-8' });
+    btn.href = URL.createObjectURL(blob);
+    btn.download = `${vcfData.firstName}-${vcfData.lastName}.vcf`;
+  }
+})();
+</script>
+</body>
+</html>
